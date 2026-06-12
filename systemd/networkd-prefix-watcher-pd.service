@@ -1,0 +1,13 @@
+[Unit]
+Description=Watch DHCPv6-PD prefix changes
+After=systemd-networkd.service
+Wants=systemd-networkd.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/networkd-prefix-watcher --mode pd --prefix-len 56 --interface wan0
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

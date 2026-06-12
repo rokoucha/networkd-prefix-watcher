@@ -1,0 +1,13 @@
+[Unit]
+Description=Watch RA IPv6 prefix changes
+After=systemd-networkd.service
+Wants=systemd-networkd.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/networkd-prefix-watcher --mode ra --prefix-len 64 --interface wan0
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

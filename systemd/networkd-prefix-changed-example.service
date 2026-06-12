@@ -1,0 +1,11 @@
+[Unit]
+Description=Example service triggered by networkd-prefix-watcher
+PartOf=networkd-prefix-changed.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/run/networkd-prefix-watcher/prefix.env
+ExecStart=/bin/sh -c 'echo "prefixes changed: ${PREVIOUS_PREFIXES} -> ${PREFIXES}"'
+
+[Install]
+WantedBy=networkd-prefix-changed.target
